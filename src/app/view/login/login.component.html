@@ -1,0 +1,27 @@
+<form class="flex-col  p-4 bg-gray-700 rounded w-2/3 md:w-1/4" (ngSubmit)="onSubmit()" [formGroup]="form">
+  <h2 class=" text-xl text-center">Bienvenido de nuevo</h2>
+  <a class="text-center text-sm hover:text-yellow-400 " routerLink="/signup">¿Todavía no tienes
+      cuenta? Crea una aquí</a>
+    <br/>
+    <br/>
+    <label class=" py-2" for="username">Username</label>
+    <input formControlName="username" type="text" name="username">
+    <p class="text-yellow-400 text-sm" *ngIf="usernameField.hasError('required') && usernameField.touched">El username es
+        requerido</p>
+        <p class="text-yellow-400 text-sm" *ngIf="usernameField.hasError('username')">Username no válido</p>
+        
+    <br/>
+    <br/>
+    <label class=" py-2" for="password">Contraseña</label>
+    <input formControlName="password" type="password" name="password">
+    <br/>
+  <p class="text-yellow-400 text-sm" *ngIf="passwordField.hasError('required') && passwordField.touched">
+      Contraseña no válida</p>
+  <p class="text-yellow-400 text-sm" *ngIf="passwordField.hasError('minlength')">La contraseña debe contener al
+      menos 7
+      caracteres</p>
+
+  <button class="bg-yellow-400 text-gray-700 hover:bg-yellow-500 p-2 mt-6 rounded" type="submit"
+      [disabled]="form.invalid">Submit</button>
+  <p *ngIf="invalidLogin">Username o contraseña no válidos</p>
+</form>
