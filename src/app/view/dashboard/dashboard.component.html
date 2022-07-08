@@ -1,3 +1,7 @@
+<p>Con quien quieres hablar? {{peerUsername}}</p>
+<input type="text" placeholder="username to look" name="peerUsername" [(ngModel)]="peerUsername" minlength="1" type="text">
+<button (click)="findPeerUsername()">Send</button>
+
 <p>SI VES ESTOS ESTAS EN EL CIELOOOOOO!</p>
 <p >{{userInfo.username}}</p>
 <p class="">{{userInfo.id}}</p>

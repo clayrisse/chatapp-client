@@ -14,12 +14,15 @@ export class ChatRoomComponent implements OnInit {
 
   chat: Chat = new Chat(0, 0, []);
   chatId: number = this.route.snapshot.params["chatId"];
+ 
 
   constructor(
     private chatMsgService: ChatMsgService, 
     private auth: AuthService,
     private router: Router, 
     private route: ActivatedRoute) { 
+      
+      this.chatId = this.route.snapshot.params["chatId"];
   }
 
   ngOnInit(): void {
@@ -28,10 +31,7 @@ export class ChatRoomComponent implements OnInit {
       res => {
         this.chat = new Chat(res.id, res.peerId, res.msgList)
         console.log('this.chat', this.chat)
-      }
-    )
-    
-      
+    })
   }
 
   sendMsgSr(msgContent: string) {
@@ -39,23 +39,12 @@ export class ChatRoomComponent implements OnInit {
   const msgOut = new MsgOut (this.chat.peerId, msgContent, String(Date.now()))
   
   this.chatMsgService.sendMessage(msgOut).subscribe(
-    res=> {}
+    res=> {
+      console.log('res', res)
+    }
   )
 
-
-  // receiverId;
-  //   private String content;
-  //   private String timestamp;
-
   }
-  // getPokemons(username: string) {
-  //   this.pokemonList = []
-  //   this.userService.getTrainersPokemonList(username).subscribe(
-     
-  //     response => { 
-  //       console.log(response)
-  //       for (const poke of response)  this.pokemonList.push(poke)
-  //   })
-  // }
+
 
 }

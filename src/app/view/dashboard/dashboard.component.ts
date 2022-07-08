@@ -14,12 +14,31 @@ export class DashboardComponent implements OnInit {
 
   userInfo: UserIn = new UserIn (0, '', '', [], '', '', [], [], '')
   // userInfo: UserIn = new UserIn (0, '', '', '', [], [], '')
-  chatList: Chat[] = []
+  chatList: Chat[] = [];
+  peerUsername: string = '';
+  newChatId: number = 0;
 
   constructor(
     private chatMsgService: ChatMsgService, 
     private auth: AuthService, 
-    private router: Router) {}
+    private router: Router) {
+
+      // this.newChatId = ''
+
+    }
+
+    findPeerUsername() {
+      this.chatMsgService.openChatRoomWith(this.peerUsername).subscribe (
+        res => {
+          this.newChatId = res.id
+          console.log('new room DATA', res);
+          this.ngOnInit();
+          this.router.navigate(['/chat/' + this.newChatId]);
+          console.log('this.peerUsername', this.peerUsername)
+        }
+      )
+      // this.router.navigate(['/chat/' + this.newChatId]);
+    }
 
   ngOnInit(): void {
     if(!this.auth.isLoggedIn) {
@@ -44,7 +63,7 @@ export class DashboardComponent implements OnInit {
             console.log('superUser', superUser)
             this.userInfo = superUser;
           // this.auth.saveUserInfo(data);
-          // this.router.navigate(['/dashboard']); 
+          this.router.navigate(['/dashboard']); 
         },
         error: (data) => {
             console.log(data)

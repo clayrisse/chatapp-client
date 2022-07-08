@@ -6,7 +6,6 @@ import { MsgOut } from '../model/msg-out';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
-import { Messa}
 
 @Injectable({
   providedIn: 'root'
@@ -36,8 +35,13 @@ export class ChatMsgService {
   }
   
   sendMessage(msgOut: MsgOut): Observable<MsgIn> {
-    return this.http.post<MsgIn>(this.rootUrl + 'chatter/msg/', msgOut, this.auth.getAuthHeaders())
-
+    console.log('msgOut---', msgOut)
+    return this.http.post<MsgIn>(this.rootUrl + '/chatter/msg/', msgOut, this.auth.getAuthHeaders())
+  }
+  
+  openChatRoomWith(peerUsername: string): Observable<Chat> {
+    
+    return this.http.get<Chat>(this.rootUrl + '/chatter/chat/open/' + peerUsername, this.auth.getAuthHeaders())
   }
 
 }

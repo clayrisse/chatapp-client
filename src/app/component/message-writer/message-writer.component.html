@@ -4,5 +4,5 @@
   <button class="" type="submit" [disabled]="msgForm.invalid">Form</button>
 </form> -->
   <p>{{msgContent}}</p>
-  <input type="text" placeholder="Write message" name="msgContent"[(ngModel)]="msgContent" minlength="1" type="text" name="message">
+  <input type="text" placeholder="Write message" name="msgContent"[(ngModel)]="msgContent" minlength="1" type="text">
   <button (click)="sendMsgJr()">Send</button>
