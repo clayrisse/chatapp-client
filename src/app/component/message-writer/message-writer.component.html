@@ -1,1 +1,8 @@
-<p>message-writer works!</p>
+<h2 class="">Escribe un mensaje</h2>
+<!-- <form class="" (ngSubmit)="onSubmit()" [formGroup]="msgForm">
+  <input formControlName="messageField" [(ngModel)]="msgContent" type="text" name="message">
+  <button class="" type="submit" [disabled]="msgForm.invalid">Form</button>
+</form> -->
+  <p>{{msgContent}}</p>
+  <input type="text" placeholder="Write message" name="msgContent"[(ngModel)]="msgContent" minlength="1" type="text" name="message">
+  <button (click)="sendMsgJr()">Send</button>

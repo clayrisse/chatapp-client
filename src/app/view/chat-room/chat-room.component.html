@@ -1,1 +1,7 @@
 <p>chat-room works!</p>
+
+<!-- <div *ngFor="let chat of chat.msgList"> -->
+    <p *ngFor="let msg of chat.msgList"  >{{msg.content}} </p>
+    <!-- <p *ngFor="let msg of chat.msgList"  [ngStyle]="{'color': '#f00'}">{{msg.content}} </p> -->
+    <hr/>
+    <app-message-writer (sendMsgEvent)="sendMsgSr($event)"></app-message-writer>

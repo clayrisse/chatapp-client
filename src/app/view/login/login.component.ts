@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { User } from 'src/app/model/user';
+import { UserIn } from 'src/app/model/user-in';
 import { AuthService } from 'src/app/service/auth.service';
 
 @Component({
@@ -32,6 +33,7 @@ export class LoginComponent implements OnInit {
   onSubmit() {
     console.log("1111")
     this.auth.loginUser(new User(
+      // "q1", "qqqqqqq")
       this.usernameField.value, this.passwordField.value)
     ).subscribe(
       {
@@ -39,7 +41,7 @@ export class LoginComponent implements OnInit {
           console.log("first")
           console.log(data);
           this.auth.saveUserInfo(data);
-          this.router.navigate(['']); 
+          this.router.navigate(['/dashboard']); 
         },
         error: (data) => {
           console.log(data)

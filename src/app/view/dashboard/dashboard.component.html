@@ -1,1 +1,16 @@
 <p>SI VES ESTOS ESTAS EN EL CIELOOOOOO!</p>
+<p >{{userInfo.username}}</p>
+<p class="">{{userInfo.id}}</p>
+<!-- <div *ngFor="let chat of userInfo.chatList">
+  <div *ngFor="let msg of chat.msgList">
+    
+    <p >{{msg.content}}</p> -->
+ 
+    <app-chat-preview  *ngFor="let chatItem of userInfo.chatList, let i = index"  [chat]="chatItem" [index]="i"></app-chat-preview>
+      
+  <!-- </div>
+</div> -->
+
+
+      <!-- <button  routerLink="/trainer/{{trainer.username}}">Show card</button> -->
+      <!-- this.usernameId = this.route.snapshot.params["username"] -->

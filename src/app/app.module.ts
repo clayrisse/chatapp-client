@@ -14,6 +14,8 @@ import { DashboardComponent } from './view/dashboard/dashboard.component';
 import { ChatPreviewComponent } from './component/chat-preview/chat-preview.component';
 import { MessageComponent } from './component/message/message.component';
 import { MessageWriterComponent } from './component/message-writer/message-writer.component';
+import { ChatRoomComponent } from './view/chat-room/chat-room.component';
+
 
 @NgModule({
   declarations: [
@@ -25,7 +27,8 @@ import { MessageWriterComponent } from './component/message-writer/message-write
     DashboardComponent,
     ChatPreviewComponent,
     MessageComponent,
-    MessageWriterComponent
+    MessageWriterComponent,
+    ChatRoomComponent
   ],
   imports: [
     BrowserModule,

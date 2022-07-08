@@ -1,4 +1,9 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Route, Router } from '@angular/router';
+import { AuthService } from 'src/app/service/auth.service';
+import { ChatMsgService } from 'src/app/service/chat-msg.service';
+import { Chat } from 'src/app/model/chat';
+import { MsgOut } from 'src/app/model/msg-out';
 
 @Component({
   selector: 'app-chat-room',
@@ -7,9 +12,50 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ChatRoomComponent implements OnInit {
 
-  constructor() { }
+  chat: Chat = new Chat(0, 0, []);
+  chatId: number = this.route.snapshot.params["chatId"];
+
+  constructor(
+    private chatMsgService: ChatMsgService, 
+    private auth: AuthService,
+    private router: Router, 
+    private route: ActivatedRoute) { 
+  }
 
   ngOnInit(): void {
+  
+    this.chatMsgService.getChatbyId(this.chatId).subscribe(
+      res => {
+        this.chat = new Chat(res.id, res.peerId, res.msgList)
+        console.log('this.chat', this.chat)
+      }
+    )
+    
+      
   }
+
+  sendMsgSr(msgContent: string) {
+  console.log('msgContent', msgContent)
+  const msgOut = new MsgOut (this.chat.peerId, msgContent, String(Date.now()))
+  
+  this.chatMsgService.sendMessage(msgOut).subscribe(
+    res=> {}
+  )
+
+
+  // receiverId;
+  //   private String content;
+  //   private String timestamp;
+
+  }
+  // getPokemons(username: string) {
+  //   this.pokemonList = []
+  //   this.userService.getTrainersPokemonList(username).subscribe(
+     
+  //     response => { 
+  //       console.log(response)
+  //       for (const poke of response)  this.pokemonList.push(poke)
+  //   })
+  // }
 
 }
