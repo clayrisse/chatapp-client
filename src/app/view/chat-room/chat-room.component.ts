@@ -35,8 +35,9 @@ export class ChatRoomComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.intervalID = setInterval(this.getChatHistory, 1500);
-    // this.getChatHistory()
+    // user esto para simular las llamadas continuas del websocket
+    // this.intervalID = setInterval(this.getChatHistory, 1500);
+    this.getChatHistory()
     console.log( "PEER USERNNAME1111", this.chat.peerId)
     this.chatMsgService.getPeerUsername(this.chat.peerId).subscribe(
       res => {
