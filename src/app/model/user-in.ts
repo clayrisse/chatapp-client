@@ -1,4 +1,5 @@
 import { Chat } from "./chat";
+import { Contact } from "./contact";
 
 export class UserIn {
 
@@ -11,13 +12,12 @@ export class UserIn {
 
     private _profileName: string = '',
     private _profileImg: string ='',
-    private _contactList: string [] = [],
+    private _contactList: Contact [] = [],
     private _chatList: Chat[] = [],
     
     private _lastSeen: string = ''
 
 ){
-  console.log('Date.now()', Date.now())
 }
 
   get id(): number { return this._id; }
@@ -38,8 +38,8 @@ export class UserIn {
   get profileImg(): string { return this._profileImg; }
   set profileImg(value: string) { this._profileImg = value; }
   
-  get contactList(): string[] { return this._contactList; }
-  set contactList(value: string[]) { this._contactList = value; }
+  get contactList(): Contact[] { return this._contactList; }
+  set contactList(value: Contact[]) { this._contactList = value; }
   
   get chatList(): Chat[] { return this._chatList; }
   set chatList(value: Chat[]) { this._chatList = value; }

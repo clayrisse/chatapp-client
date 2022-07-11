@@ -14,13 +14,13 @@ export class AuthService {
   username: string = '';
   password: string = '';
   isLoggedIn: boolean = false;
-
-
+  showNavbar: boolean = true;
 
   constructor(private http: HttpClient) { }
 
-
   signupUser(user: User): Observable<any> {
+    this.username = user.username;
+    this.password = user.password;
     return this.http.post<User>(this.rootUrl + '/signup', user);
   }
 
@@ -31,18 +31,11 @@ export class AuthService {
   loginUser(user: User): Observable<UserIn> {
     this.username = user.username;
     this.password = user.password;
-    //   const httpOptions = {
-    //   headers: new HttpHeaders({
-    //     'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)
-    //   })
-    // };
-
-    // return this.http.get<UserIn>(this.rootUrl + '/login',  httpOptions);
     return this.http.get<UserIn>(this.rootUrl + '/login',  this.getAuthHeaders());
-
   }
+
   getAuthHeaders(): Object {
-    console.log('el header is: ', this.username + ':' + this.password, 'this.isLoggedIn', this.isLoggedIn)
+    // console.log('el header is: ', this.username + ':' + this.password, 'this.isLoggedIn', this.isLoggedIn)
     return { 
       headers: new HttpHeaders({
         'Authorization': 'Basic ' + btoa(this.username + ':' + this.password)
@@ -50,9 +43,10 @@ export class AuthService {
     }
   }
 
+  navbarOn() { this.showNavbar = true }
+  navbarOff() { this.showNavbar = false }
 
   saveUserInfo(user: UserIn) {
-
     localStorage.setItem('username', this.username);
     localStorage.setItem('password', this.password);
     this.isLoggedIn = true;

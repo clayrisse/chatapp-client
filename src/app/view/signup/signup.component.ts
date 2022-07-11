@@ -14,31 +14,17 @@ export class SignupComponent implements OnInit {
   form: FormGroup;
   usernameField: FormControl;
   passwordField: FormControl;
-  // nameField: FormControl;
-  // dateOfBirthField: FormControl;
-  // jobField: FormControl;
+  invalidLogin: boolean = false;
 
-  name: string = '';
-
-  constructor(private auth: AuthService, private router: Router) {
-    // Initialize Form Control fields
+  constructor(private router: Router, private auth: AuthService) {
     this.usernameField = new FormControl('', [Validators.required]);
     this.passwordField = new FormControl('', [Validators.required, Validators.minLength(7)]);
-    // this.nameField = new FormControl('', [Validators.required]);
-    // this.dateOfBirthField = new FormControl('', [Validators.required]);
-    // this.jobField = new FormControl('', [Validators.required]);
 
-
-    // Initialzie Form Group
     this.form = new FormGroup({
       username: this.usernameField,
       password: this.passwordField,
-      // name: this.nameField,
-      // dateOfBirth: this.dateOfBirthField,
-      // job: this.jobField
     });
   }
-
 
   ngOnInit(): void {
   }
@@ -51,11 +37,11 @@ export class SignupComponent implements OnInit {
         next: (data) => {
           console.log(data);
           this.auth.saveUserInfo(data);
-          this.router.navigate(['']); 
+          this.router.navigate(['/dashboard']); 
         },
         error: (data) => {
           console.log(data)
-          // this.invalidLogin = true;
+          this.invalidLogin = true;
         }
       });
   }

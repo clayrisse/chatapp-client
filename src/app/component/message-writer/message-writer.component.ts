@@ -35,28 +35,7 @@ export class MessageWriterComponent implements OnInit {
 
   sendMsgJr() {
     this.sendMsgEvent.emit(this.msgContent);
+    this.msgContent = '';
   }
-
-
-
-  // onSubmit() {
-    // console.log("1111")
-    // this.msgService.sendMsg(new MsgOut(
-    //   this.usernameField.value, this.passwordField.value)
-    // ).subscribe(
-    //   {
-    //     next: (data) => {
-    //       console.log("first")
-    //       console.log(data);
-    //       this.auth.saveUserInfo(data);
-    //       this.router.navigate(['']); 
-    //     },
-    //     error: (data) => {
-    //       console.log(data)
-    //       this.invalidLogin = true;
-    //     }
-    //   });
-
-  // }
 
 }

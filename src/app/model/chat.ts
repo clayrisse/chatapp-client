@@ -1,15 +1,17 @@
 import { MsgIn } from "./msg-in";
+import { User } from "./user";
+import { UserIn } from "./user-in";
 
 export class Chat {
 
   constructor(
-      private _id: number = 0,
+    private _id: number = 0,
     private _peerId: number = 0,
-    private _msgList: MsgIn [] = []
-    // private userOwner: User = ,
+    private _msgList: MsgIn [] = [],
+    private _senderId: number = 0
+    // , private _userOwner: UserIn = new UserIn(0,'','',[],'','',[],[],'')
   
   ){
-    console.log('Date.now()', Date.now())
   }
   
   get id(): number { return this._id; }
@@ -20,5 +22,10 @@ export class Chat {
   
   get msgList(): MsgIn[] { return this._msgList; }
   set msgList(value: MsgIn[]) { this._msgList = value; }
+    
+  get senderId(): number { return this._senderId; }
+  set senderId(value: number) { this._senderId = value; }
   
+  // get userOwner(): UserIn { return this._userOwner; }
+  // set userOwner(value: UserIn) { this._userOwner = value; }
 }

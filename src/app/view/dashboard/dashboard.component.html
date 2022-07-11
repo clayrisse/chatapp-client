@@ -1,20 +1,27 @@
+<app-navbar></app-navbar>
+<p>{{userInfo.username}}</p>
 <p>Con quien quieres hablar? {{peerUsername}}</p>
+
 <input type="text" placeholder="username to look" name="peerUsername" [(ngModel)]="peerUsername" minlength="1" type="text">
-<button (click)="findPeerUsername()">Send</button>
+<button (click)="findPeerUsername()">Search</button>
+<button (click)="toggleAddBtn()">Add Contact</button> 
+<button (click)="thoggleShowBtn()">Show Contacts</button> <br/><br/>
 
-<p>SI VES ESTOS ESTAS EN EL CIELOOOOOO!</p>
-<p >{{userInfo.username}}</p>
-<p class="">{{userInfo.id}}</p>
-<!-- <div *ngFor="let chat of userInfo.chatList">
-  <div *ngFor="let msg of chat.msgList">
-    
-    <p >{{msg.content}}</p> -->
+<form *ngIf="isBtnAdd" (ngSubmit)="onSubmit()" [formGroup]="contactForm">
+    <input formControlName="username" type="text" placeholder="Username" name="username">
+    <p *ngIf="usernameField.hasError('required') && usernameField.touched">El username es requerido</p>
+    <input formControlName="customName" type="text" placeholder="Name and lastname" name="customName" >
+    <p *ngIf="customNameField.hasError('required') && customNameField.touched">Nombres no válidos</p>
+  <button type="submit">+</button>
+  <!-- <button type="submit" [disabled]="contactForm.invalid">+contact</button> -->
+</form>
+
+<div class="contacts" *ngIf="isBtnShowContact">
+  <p  *ngFor="let contact of userInfo.contactList, let i = index">{{"Full name: " + contact.customName +  " / Username: " + contact.username }}</p>
+</div>
+
+<p>Hello</p>
+<p>{{userInfo.username}}</p>
  
-    <app-chat-preview  *ngFor="let chatItem of userInfo.chatList, let i = index"  [chat]="chatItem" [index]="i"></app-chat-preview>
-      
-  <!-- </div>
-</div> -->
+<app-chat-preview  *ngFor="let chatItem of userInfo.chatList, let i = index"  [peer]="findPeerUSerName(chatItem.peerId)" [chat]="chatItem" [index]="i"></app-chat-preview>
 
-
-      <!-- <button  routerLink="/trainer/{{trainer.username}}">Show card</button> -->
-      <!-- this.usernameId = this.route.snapshot.params["username"] -->

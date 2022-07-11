@@ -15,6 +15,9 @@ export class ChatPreviewComponent implements OnInit {
   chat: Chat = new Chat(0, 0, []);
 
   @Input()
+  peer: string ='';
+
+  @Input()
   index: number = 0;
   peerUsername: string = '';
 
@@ -28,10 +31,13 @@ export class ChatPreviewComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.chat.peerId, "llllllllllllllllllllllllllllllll")
     this.getPeerUsernameFromDB(this.chat.peerId);
+    console.log("22222222222222222222")
   }
   
   getPeerUsernameFromDB(peerId: number){
+    console.log("--------------------------------------------------------------------")
     this.chatMsgService.getPeerUsername(peerId).subscribe(
       response => {
         console.log('responsedel nombreeeeeee', response)

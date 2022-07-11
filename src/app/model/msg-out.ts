@@ -3,7 +3,8 @@ export class MsgOut {
   constructor(
     public receiverId: number = 0,
     public content: string = '',
-    public timestamp: string  = String(Date.now())
+    public timestamp: string  = String(Date.now()),
+    public senderId: number = 0
   ) {}
 
   // get receiverId(): number { return this._receiverId; }

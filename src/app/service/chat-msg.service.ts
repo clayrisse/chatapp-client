@@ -6,6 +6,7 @@ import { MsgOut } from '../model/msg-out';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from './auth.service';
 import { Observable } from 'rxjs';
+import { Contact } from '../model/contact';
 
 @Injectable({
   providedIn: 'root'
@@ -27,7 +28,7 @@ export class ChatMsgService {
   }
 
   getPeerUsername(peerId: number): Observable<string> {
-    return this.http.get<string>(this.rootUrl + '/username/'+peerId,  this.auth.getAuthHeaders())
+    return this.http.get<string>(this.rootUrl + '/username/'+peerId)
   }
 
   getChatbyId(chatId: number): Observable<Chat> {
@@ -39,9 +40,16 @@ export class ChatMsgService {
     return this.http.post<MsgIn>(this.rootUrl + '/chatter/msg/', msgOut, this.auth.getAuthHeaders())
   }
   
+  removeMessage(id: number): Observable<MsgIn> {
+    return this.http.delete<MsgIn>(this.rootUrl + '/chatter/msg/'+ id + "/" + Date.now(), this.auth.getAuthHeaders())
+  }
+  
   openChatRoomWith(peerUsername: string): Observable<Chat> {
-    
     return this.http.get<Chat>(this.rootUrl + '/chatter/chat/open/' + peerUsername, this.auth.getAuthHeaders())
   }
+  
+  addContact(contact: Contact): Observable<Contact> {
+    return this.http.post<Contact>(this.rootUrl + '/chatter/contact', contact, this.auth.getAuthHeaders())
 
+  }
 }

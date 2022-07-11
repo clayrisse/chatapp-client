@@ -30,15 +30,13 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   onSubmit() {
-    console.log("1111")
     this.auth.loginUser(new User(
-      // "q1", "qqqqqqq")
       this.usernameField.value, this.passwordField.value)
     ).subscribe(
       {
         next: (data) => {
-          console.log("first")
           console.log(data);
           this.auth.saveUserInfo(data);
           this.router.navigate(['/dashboard']); 
